@@ -15,10 +15,10 @@ for (var i=0; i < pacientes.length; i++) {
 
     var tdImc = paciente.querySelector(".info-imc");
 
-    var pesoEhvalido = true;
-    var alturaEhvalida = true;
+    var pesoEhvalido = validaPeso(peso);
+    var alturaEhvalida = validaAltura(altura);
 
-    if (peso <= 0 || peso >= 1000){
+    if (!pesoEhvalido){
         console.log("Peso inválido!");
         pesoEhvalido = false;
         tdImc.textContent = "Peso Inválido!";
@@ -26,7 +26,7 @@ for (var i=0; i < pacientes.length; i++) {
         // Usamos a função add para adicionar uma nova classe, que neste caso altera a formatação (ela foi criada no arquivo css). 
     }
 
-    if (altura <= 0 || altura >= 3.00){
+    if (!alturaEhvalida){
         console.log("Altura inválida!");
         pesoEhvalido = false;
         tdImc.textContent = "Altura Inválida!";
@@ -35,14 +35,30 @@ for (var i=0; i < pacientes.length; i++) {
 
     if (alturaEhvalida && pesoEhvalido) {
         var imc = calculaImc(altura, peso);
-        tdImc.textContent = imc; // Método 'toFixed' arrendoda números.
+        tdImc.textContent = imc; 
+    }
+}
+
+function validaPeso(peso){
+    if(peso > 0 && peso < 1000){
+        return true;
+    }else{
+        return false
+    }
+}
+
+function validaAltura(altura){
+    if(altura > 0 && altura < 3){
+        return true;
+    }else{
+        return false;
     }
 }
 
 function calculaImc(altura, peso) {
     var imc = 0;
     imc = peso / (altura * altura);
-    return imc.toFixed(2);
+    return imc.toFixed(2); // Método 'toFixed' arrendoda números.
 }
 
 
