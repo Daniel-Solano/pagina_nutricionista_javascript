@@ -18,21 +18,24 @@ botaoAdicionar.addEventListener("click", function(event) {
         return;
     }
 
-    if(!validaPaciente(paciente)){
-        console.log("Paciente inválido");
-        return; // Esse return vazio faz com que a função não compute as linhas restantes
-    }
-
     // Adicionando o paciente na tabela
     var tabela = document.querySelector("#tabela-pacientes"); // Seleciona tabela do index.html
 
     tabela.appendChild(pacienteTr); // Adiciona a tag "tr" na tabela do index.html
 
-    form.reset(); // Limpa os campod do formulário após a inclusão
+    form.reset(); // Limpa os campos do formulário após a inclusão
+    var mensagensErro = document.querySelector("#mensagens-erro");
+    mensagensErro.innerHTML = "";
+
+    if(!validaPaciente(paciente)){
+        console.log("Paciente inválido");
+        return; // Esse return vazio faz com que a função não compute as linhas restantes
+    }
 })
 
 function exibeMensagensDeErro(erros) {
-    var ul = document.querySelector("#mensagens-erro")
+    var ul = document.querySelector("#mensagens-erro");
+    ul.innerHTML = ""
     erros.forEach(function(erro) {
         var li = document.createElement("li");
         li.textContent = erro;
@@ -87,6 +90,14 @@ function validaPaciente(paciente){
 
     if (paciente.gordura.length == 0){
         erros.push("A gordura não pode ser em branco")
+    }
+
+    if (paciente.peso.length == 0){
+        erros.push("O peso não pode ser em branco")
+    }
+
+    if (paciente.altura.length == 0){
+        erros.push("A altura não pode ser em branco")
     }
 
     if(!validaPeso(paciente.peso)) erros.push("Peso é inválido!"); // Laço "if" em uma linha, "push" adiciona à lista
