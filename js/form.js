@@ -27,10 +27,6 @@ botaoAdicionar.addEventListener("click", function(event) {
     var mensagensErro = document.querySelector("#mensagens-erro");
     mensagensErro.innerHTML = "";
 
-    if(!validaPaciente(paciente)){
-        console.log("Paciente inválido");
-        return; // Esse return vazio faz com que a função não compute as linhas restantes
-    }
 })
 
 function exibeMensagensDeErro(erros) {
