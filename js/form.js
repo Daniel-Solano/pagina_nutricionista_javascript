@@ -12,10 +12,9 @@ botaoAdicionar.addEventListener("click", function(event) {
     var pacienteTr = montaTr(paciente);
 
     var erros = validaPaciente(paciente);
-
+    console.log(erros)
     if(erros.length > 0){
-        var mensagemErro = document.querySelector("#mensagem-erro");
-        mensagemErro.textContent = erro;
+        exibeMensagensDeErro(erros);
         return;
     }
 
@@ -31,6 +30,16 @@ botaoAdicionar.addEventListener("click", function(event) {
 
     form.reset(); // Limpa os campod do formulário após a inclusão
 })
+
+function exibeMensagensDeErro(erros) {
+    var ul = document.querySelector("#mensagens-erro")
+    erros.forEach(function(erro) {
+        var li = document.createElement("li");
+        li.textContent = erro;
+        ul.appendChild(li);
+    });
+
+}
 
 titulo.addEventListener("click", function(){ // Selecionamos um elemento e adicionamos um "escutador" de eventos nele mais a função.
     console.log("Olha só, posso chamar uma função anônima.");
@@ -72,7 +81,15 @@ function validaPaciente(paciente){
 
     var erros = [];
 
-    if(!validaPeso(paciente.peso)) erros.push("Peso é inválido!"); // Laço "if" em uma linha
+    if (paciente.nome.length == 0){
+        erros.push("O nome não pode ser em branco")
+    }
+
+    if (paciente.gordura.length == 0){
+        erros.push("A gordura não pode ser em branco")
+    }
+
+    if(!validaPeso(paciente.peso)) erros.push("Peso é inválido!"); // Laço "if" em uma linha, "push" adiciona à lista
     if(!validaAltura(paciente.altura)) erros.push("Altura é inválida!");
 
     return erros;
