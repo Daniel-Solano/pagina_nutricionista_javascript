@@ -29,6 +29,11 @@ botaoAdicionar.addEventListener("click", function(event) {
 
 })
 
+function adicionaPacienteNaTabela(paciente){
+    var pacienteTr = montaTr(paciente);
+    var tabela
+}
+
 function exibeMensagensDeErro(erros) {
     var ul = document.querySelector("#mensagens-erro");
     ul.innerHTML = ""
